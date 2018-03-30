@@ -82,14 +82,21 @@ var Profiles = map[string]Transformer{
 }
 
 func appendSingle(a []string, b []string) []string {
-	m := map[string]struct{}{}
+	out := make([]string, 0, len(a)+len(b))
+	m := map[string]bool{}
 	for _, f := range a {
-		m[f] = struct{}{}
+		if !m[f] {
+			out = append(out, f)
+		}
+		m[f] = true
 	}
 	for _, f := range b {
-		m[f] = struct{}{}
+		if !m[f] {
+			out = append(out, f)
+		}
+		m[f] = true
 	}
-	return mapKeys(m)
+	return out
 }
 
 func deleteEntries(arr []string, del []string) []string {
