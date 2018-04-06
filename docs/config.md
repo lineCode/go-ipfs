@@ -141,8 +141,9 @@ A boolean value. If set to true, all block reads from disk will be hashed and
 verified. This will cause increased CPU utilization.
 
 - `BloomFilterSize`
-A number representing the size in bytes of the blockstore's bloom filter. A
-value of zero represents the feature being disabled.
+A number representing the size in bytes of the blockstore's [bloom filter](https://en.wikipedia.org/wiki/Bloom_filter). A
+value of zero represents the feature being disabled.  
+Using the formula `num_blocks * 1.44 * logtwo(probability_of_false_positive)`, for a 1% false positive rate and 1m blocks, you'd want a filter around 1000000 bytes.
 
 Default: `0`
 
